@@ -6,9 +6,10 @@ public class GameManager : MonoBehaviour
 {
     private void Start()
     {
-        // Crea un objeto en la escena, le adjunta la componente Sprite Renderer y le asigna el material del script GameAssets
+        // Crea un objeto en la escena, le adjunta la componente Sprite Renderer y le asigna el material del script GameAssets, le asigna el script snake(movimiento)
         GameObject snakeHeadGameObject = new GameObject("Snake Head");
         SpriteRenderer snakeSpriteRenderer = snakeHeadGameObject.AddComponent<SpriteRenderer>();
         snakeSpriteRenderer.sprite = GameAssets.Instance.snakeHeadSprite;
+        snakeHeadGameObject.AddComponent<Snake>();
     }
 }
