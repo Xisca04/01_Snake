@@ -63,7 +63,25 @@ public class Snake : MonoBehaviour
         }
 
         // Cambio dirección hacia derecha
+        if (horizontalInput > 0) // Si he pulsado hacia dch (D o Flecha dch)
+        {
+            if (gridMoveDirection.y != 1) // Si iba en horizontal
+            {
+                // Cambio la dirección hacia abajo
+                gridMoveDirection.x = 1;
+                gridMoveDirection.y = 0;
+            }
+        }
 
         // Cambio dirección hacia izquierda
+        if (horizontalInput < 0) // Si he pulsado hacia dch (D o Flecha dch)
+        {
+            if (gridMoveDirection.y != -1) // Si iba en horizontal
+            {
+                // Cambio la dirección hacia abajo
+                gridMoveDirection.x = -1;
+                gridMoveDirection.y = 0;
+            }
+        }
     }
 }
