@@ -19,6 +19,7 @@ public class Snake : MonoBehaviour
         gridPosition = startGridPosition;
 
         gridMoveDirection = new Vector2Int(0, 1); // Dirección arriba por defecto
+        transform.eulerAngles = Vector3.zero; // Rotación arriba por defecto
     }
 
     private void Update()
