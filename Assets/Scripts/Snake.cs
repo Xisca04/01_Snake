@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Snake : MonoBehaviour
 {
-    // Snake movement
-
     private Vector2Int gridPosition;
     private Vector2Int startGridPosition;
     private Vector2Int gridMoveDirection;
@@ -25,6 +23,13 @@ public class Snake : MonoBehaviour
 
     private void Update()
     {
+        HandleMoveDirection();
+        HandleGridMovement();
+
+    }
+
+    private void HandleGridMovement()
+    {
         gridMoveTimer += Time.deltaTime;
         if (gridMoveTimer >= gridMoveTimerMax)
         {
@@ -43,42 +48,41 @@ public class Snake : MonoBehaviour
         // Cambio dirección hacia arriba
         if (verticalInput > 0) // Si he pulsado hacia arriba (W o Flecha Arriba)
         {
-            if (gridMoveDirection.y != 1) // Si iba en horizontal
+            if (gridMoveDirection.x != 0) // Si iba en horizontal
             {
-                // Cambio la dirección hacia arriba
+                // Cambio la dirección hacia arriba (0,1)
                 gridMoveDirection.x = 0;
                 gridMoveDirection.y = 1;
             }
         }
 
         // Cambio dirección hacia abajo
-        if (verticalInput < 0) // Si he pulsado hacia abajo (S o Flecha Abajo)
+        // Input es abajo?
+        if (verticalInput < 0)
         {
-            if (gridMoveDirection.y != 1) // Si iba en horizontal
+            // Mi dirección hasta ahora era horizontal
+            if (gridMoveDirection.x != 0)
             {
-                // Cambio la dirección hacia abajo
                 gridMoveDirection.x = 0;
                 gridMoveDirection.y = -1;
             }
         }
 
         // Cambio dirección hacia derecha
-        if (horizontalInput > 0) // Si he pulsado hacia dch (D o Flecha dch)
+        if (horizontalInput > 0)
         {
-            if (gridMoveDirection.x != 1) // Si iba en vertical
+            if (gridMoveDirection.y != 0)
             {
-                // Cambio la dirección hacia la derecha
                 gridMoveDirection.x = 1;
                 gridMoveDirection.y = 0;
             }
         }
 
         // Cambio dirección hacia izquierda
-        if (horizontalInput < 0) // Si he pulsado hacia dch (A o Flecha izq)
+        if (horizontalInput < 0)
         {
-            if (gridMoveDirection.x != 1) // Si iba en vertical
+            if (gridMoveDirection.y != 0)
             {
-                // Cambio la dirección hacia la izquierda
                 gridMoveDirection.x = -1;
                 gridMoveDirection.y = 0;
             }
