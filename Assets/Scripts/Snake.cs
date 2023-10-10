@@ -32,6 +32,7 @@ public class Snake : MonoBehaviour
 
     public void Setup(LevelGrid levelGrid)
     {
+        // levelGrid de snake = levelGrid que viene por parámetro
         this.levelGrid = levelGrid;
     }
 
@@ -45,6 +46,9 @@ public class Snake : MonoBehaviour
 
             transform.position = new Vector3(gridPosition.x, gridPosition.y, 0);
             transform.eulerAngles = new Vector3(0, 0, GetAngleFromVector(gridMoveDirection));
+
+            // ¿He comido comida?
+            levelGrid.SnakeMoved(gridPosition);
         }
     }
 
@@ -106,6 +110,11 @@ public class Snake : MonoBehaviour
         }
 
         return degrees - 90;
+    }
+
+    public Vector2Int GetGridPosition()
+    {
+        return gridPosition;
     }
 }
 
