@@ -35,10 +35,12 @@ public class LevelGrid
 
     private void SpawnFood()
     {
+        // Bucle while
         // while (condicion){
         // cosas
         // }
 
+        // Bucle Do while
         // { cosas }
         // while (condicion)
 

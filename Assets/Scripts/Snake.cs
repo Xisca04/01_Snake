@@ -15,6 +15,9 @@ public class Snake : MonoBehaviour
 
     private LevelGrid levelGrid;
 
+    private int snakeBodySize;
+    private List<Vector2Int> snakeMovePositionsList;
+
     private void Awake()
     {
         startGridPosition = new Vector2Int(0, 0);
@@ -22,6 +25,9 @@ public class Snake : MonoBehaviour
 
         gridMoveDirection = new Vector2Int(0, 1); // Dirección arriba por defecto
         transform.eulerAngles = Vector3.zero; // Rotación arriba por defecto
+
+        snakeBodySize = 0;
+        snakeMovePositionsList = new List<Vector2Int>();
     }
 
     private void Update()
@@ -41,8 +47,16 @@ public class Snake : MonoBehaviour
         gridMoveTimer += Time.deltaTime;
         if (gridMoveTimer >= gridMoveTimerMax)
         {
-            gridPosition += gridMoveDirection;
             gridMoveTimer -= gridMoveTimerMax;
+
+            snakeMovePositionsList.Insert(0, gridPosition);
+            gridPosition += gridMoveDirection;
+
+            if (snakeMovePositionsList.Count > snakeBodySize)
+            {
+                snakeMovePositionsList.
+                    RemoveAt(snakeMovePositionsList.Count - 1);
+            }
 
             transform.position = new Vector3(gridPosition.x, gridPosition.y, 0);
             transform.eulerAngles = new Vector3(0, 0, GetAngleFromVector(gridMoveDirection));
