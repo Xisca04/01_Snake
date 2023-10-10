@@ -13,6 +13,8 @@ public class Snake : MonoBehaviour
     private float gridMoveTimer;
     private float gridMoveTimerMax = 1f; // La serpiente se moverá a cada segundo
 
+    private LevelGrid levelGrid;
+
     private void Awake()
     {
         startGridPosition = new Vector2Int(0, 0);
@@ -26,6 +28,11 @@ public class Snake : MonoBehaviour
     {
         HandleMoveDirection();
         HandleGridMovement();
+    }
+
+    public void Setup(LevelGrid levelGrid)
+    {
+        this.levelGrid = levelGrid;
     }
 
     private void HandleGridMovement()
@@ -101,3 +108,4 @@ public class Snake : MonoBehaviour
         return degrees - 90;
     }
 }
+

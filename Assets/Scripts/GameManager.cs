@@ -4,12 +4,23 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    private LevelGrid levelGrid;
+    private Snake snake;
+
     private void Start()
     {
-        // Crea un objeto en la escena, le adjunta la componente Sprite Renderer y le asigna el material del script GameAssets, le asigna el script snake(movimiento)
+        // Configuración de la cabeza de serpiente
         GameObject snakeHeadGameObject = new GameObject("Snake Head");
         SpriteRenderer snakeSpriteRenderer = snakeHeadGameObject.AddComponent<SpriteRenderer>();
         snakeSpriteRenderer.sprite = GameAssets.Instance.snakeHeadSprite;
-        snakeHeadGameObject.AddComponent<Snake>();
+        snake = snakeHeadGameObject.AddComponent<Snake>();
+
+        // Configurar el LevelGrid
+        levelGrid = new LevelGrid(20, 20);
+        snake.Setup(levelGrid);
+
+        // Configurar el Snake
+        levelGrid.Setup(snake);
+
     }
 }

@@ -5,14 +5,33 @@ using UnityEngine;
 public class LevelGrid 
 {
     private Vector2Int foodGridPosition;
+    private GameObject foodGameObject;
 
     private int width;
     private int height;
+
+    private Snake snake;
+
+    public void Setup(Snake snake)
+    {
+        this.snake = snake;
+    }
 
     public LevelGrid(int w, int h)
     {
         width = w;
         height = h;
+
+        SpawnFood();
+    }
+
+    public void SnakeMoved(Vector2Int snakeGridPosition)
+    {
+        if (snakeGridPosition == foodGridPosition)
+        {
+            Object.Destroy(foodGameObject);
+            SpawnFood();
+        }
     }
 
     private void SpawnFood()
@@ -21,7 +40,7 @@ public class LevelGrid
             Random.Range(-width / 2, width / 2),
             Random.Range(-height / 2, height / 2));
 
-        GameObject foodGameObject = new GameObject("Food");
+        foodGameObject = new GameObject("Food");
         SpriteRenderer foodSpriteRenderer = foodGameObject.AddComponent<SpriteRenderer>();
         foodSpriteRenderer.sprite = GameAssets.Instance.foodSprite;
         foodGameObject.transform.position = new Vector3(foodGridPosition.x, foodGridPosition.y, 0);
