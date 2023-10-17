@@ -4,7 +4,30 @@ using UnityEngine;
 
 public class Snake : MonoBehaviour
 {
-    private Vector2Int gridPosition;
+    private class SnakeBodyPart
+    {
+        private Vector2Int gridPosition; // Posición 2D de la SnakeBodyPart
+        private Transform transform;
+
+        public SnakeBodyPart(int bodyIndex)
+        {
+            GameObject snakeBodyPartGameObject = new GameObject("Snake Body",
+                typeof(SpriteRenderer));
+            SpriteRenderer snakeBodyPartSpriteRenderer = snakeBodyPartGameObject.GetComponent<SpriteRenderer>();
+            snakeBodyPartSpriteRenderer.sprite =
+                GameAssets.Instance.snakeBodySprite;
+            snakeBodyPartSpriteRenderer.sortingOrder = -bodyIndex;
+            transform = snakeBodyPartGameObject.transform;
+        }
+
+        public void SetGridPosition(Vector2Int gridPosition)
+        {
+            this.gridPosition = gridPosition; // Posición 2D de la SnakeBodyPart
+            transform.position = new Vector3(gridPosition.x, gridPosition.y, 0); // Posición 3D del G.O.
+        }
+    }
+
+    private Vector2Int gridPosition; // Posición 2D de la cabeza
     private Vector2Int startGridPosition;
     private Vector2Int gridMoveDirection;
 
@@ -15,8 +38,10 @@ public class Snake : MonoBehaviour
 
     private LevelGrid levelGrid;
 
-    private int snakeBodySize;
-    private List<Vector2Int> snakeMovePositionsList;
+    private int snakeBodySize; // Cantidad de partes del cuerpo (sin cabeza)
+    private List<Vector2Int> snakeMovePositionsList; // Posiciones de cada parte (por orden)
+    private List<SnakeBodyPart> snakeBodyPartsList;
+
 
     private void Awake()
     {
@@ -28,6 +53,7 @@ public class Snake : MonoBehaviour
 
         snakeBodySize = 0;
         snakeMovePositionsList = new List<Vector2Int>();
+        snakeBodyPartsList = new List<SnakeBodyPart>();
     }
 
     private void Update()
@@ -42,7 +68,7 @@ public class Snake : MonoBehaviour
         this.levelGrid = levelGrid;
     }
 
-    private void HandleGridMovement()
+    private void HandleGridMovement() // Relativo al movimiento en 2D
     {
         gridMoveTimer += Time.deltaTime;
         if (gridMoveTimer >= gridMoveTimerMax)
@@ -58,6 +84,7 @@ public class Snake : MonoBehaviour
             {
                 // El cuerpo crece
                 snakeBodySize++;
+                CreateBodyPart();
             }
 
             if (snakeMovePositionsList.Count > snakeBodySize)
@@ -68,6 +95,7 @@ public class Snake : MonoBehaviour
 
             transform.position = new Vector3(gridPosition.x, gridPosition.y, 0);
             transform.eulerAngles = new Vector3(0, 0, GetAngleFromVector(gridMoveDirection));
+            UpdateBodyParts();
         }
     }
 
@@ -141,6 +169,19 @@ public class Snake : MonoBehaviour
         List<Vector2Int> gridPositionList = new List<Vector2Int>() { gridPosition };
         gridPositionList.AddRange(snakeMovePositionsList);
         return gridPositionList;
+    }
+
+    private void CreateBodyPart()
+    {
+        snakeBodyPartsList.Add(new SnakeBodyPart(snakeBodySize));
+    }
+
+    private void UpdateBodyParts()
+    {
+        for (int i = 0; i < snakeBodyPartsList.Count; i++)
+        {
+            snakeBodyPartsList[i].SetGridPosition(snakeMovePositionsList[i]);
+        }
     }
 }
 
