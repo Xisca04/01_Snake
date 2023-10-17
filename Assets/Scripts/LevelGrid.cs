@@ -24,23 +24,26 @@ public class LevelGrid
         SpawnFood();
     }
 
-    public void SnakeMoved(Vector2Int snakeGridPosition)
+    public bool TrySnakeEatFood(Vector2Int snakeGridPosition)
     {
         if (snakeGridPosition == foodGridPosition)
         {
             Object.Destroy(foodGameObject);
             SpawnFood();
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
     private void SpawnFood()
     {
-        // Bucle while
         // while (condicion){
         // cosas
         // }
 
-        // Bucle Do while
         // { cosas }
         // while (condicion)
 
