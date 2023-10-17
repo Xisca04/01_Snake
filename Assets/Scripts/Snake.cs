@@ -68,7 +68,6 @@ public class Snake : MonoBehaviour
 
             transform.position = new Vector3(gridPosition.x, gridPosition.y, 0);
             transform.eulerAngles = new Vector3(0, 0, GetAngleFromVector(gridMoveDirection));
-
         }
     }
 
@@ -135,6 +134,13 @@ public class Snake : MonoBehaviour
     public Vector2Int GetGridPosition()
     {
         return gridPosition;
+    }
+
+    public List<Vector2Int> GetFullSnakeBodyGridPosition()
+    {
+        List<Vector2Int> gridPositionList = new List<Vector2Int>() { gridPosition };
+        gridPositionList.AddRange(snakeMovePositionsList);
+        return gridPositionList;
     }
 }
 
