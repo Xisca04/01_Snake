@@ -192,7 +192,8 @@ public class Snake : MonoBehaviour
 
             SnakeMovePosition snakeMovePosition = new SnakeMovePosition(previousSnakeMovePosition, gridPosition, gridMoveDirection);
             snakeMovePositionsList.Insert(0, snakeMovePosition);
-
+           
+            //Relación entre enum Direction y vectores: left, right, up y down.
             Vector2Int gridMoveDirectionVector;
             switch (gridMoveDirection)
             {
@@ -211,6 +212,13 @@ public class Snake : MonoBehaviour
                     break;
             }
             gridPosition += gridMoveDirectionVector; // Mueve la posición 2D de la cabeza de la serpiente
+
+            /*
+            foreach (SnakeMovePosition galleta in snakeMovePositionsList)
+            {
+
+            }
+            */
 
             // ¿He comido comida?
             bool snakeAteFood = levelGrid.TrySnakeEatFood(gridPosition);
