@@ -14,7 +14,7 @@ public class Snake : MonoBehaviour
 
     private class SnakeBodyPart
     {
-        private Vector2Int gridPosition; // Posición 2D de la SnakeBodyPart
+        private SnakeMovePosition sankeMovePosition; // Posición 2D de la SnakeBodyPart
         private Transform transform;
 
         public SnakeBodyPart(int bodyIndex)
@@ -28,20 +28,47 @@ public class Snake : MonoBehaviour
             transform = snakeBodyPartGameObject.transform;
         }
 
-        public void SetGridPosition(Vector2Int gridPosition)
+        public void SetMovePosition(SnakeMovePosition snakeMovePosition)
         {
-            this.gridPosition = gridPosition; // Posición 2D de la SnakeBodyPart
+            // Position (gridPosition)
+            this.sankeMovePosition = snakeMovePosition; // Posición 2D de la SnakeBodyPart
+            Vector2Int gridPosition = snakeMovePosition.GetGridPosition();
             transform.position = new Vector3(gridPosition.x, gridPosition.y, 0); // Posición 3D del G.O.
+
+            // Direction
+            float angle;
+            switch(snakeMovePosition.GetDirection())
+            {
+                default:
+                case Direction.Left:
+                    angle = 90;
+                    break;
+                case Direction.Right:
+                    angle = -90;
+                    break;
+                case Direction.Up:
+                    angle = 0;
+                    break;
+                case Direction.Down:
+                    angle = 180;
+                    break;
+            }// Fin switch
+
+            transform.eulerAngles = new Vector3(0, 0, angle);
         }
+
+
     }
 
     private class SnakeMovePosition
     {
+        private SnakeMovePosition previousSnakeMovePosition;
         private Vector2Int gridPosition;
         private Direction direction;
 
-        public SnakeMovePosition(Vector2Int gridPosition, Direction direction)
+        public SnakeMovePosition(SnakeMovePosition previousSnakeMovePosition, Vector2Int gridPosition, Direction direction)
         {
+            this.previousSnakeMovePosition = previousSnakeMovePosition;
             this.gridPosition = gridPosition;
             this.direction = direction;
         }
@@ -49,6 +76,21 @@ public class Snake : MonoBehaviour
         public Vector2Int GetGridPosition()
         {
             return gridPosition;
+        }
+
+        public Direction GetDirection() 
+        {  
+            return direction; 
+        }
+
+        public Direction GetPreviousDirection()
+        {
+            if(previousSnakeMovePosition == null)
+            {
+                return Direction.Right;
+            }
+
+            return previousSnakeMovePosition.GetDirection();
         }
     }
 
@@ -59,7 +101,7 @@ public class Snake : MonoBehaviour
     private float horizontalInput, verticalInput;
 
     private float gridMoveTimer;
-    private float gridMoveTimerMax = 1f; // La serpiente se moverá a cada segundo
+    private float gridMoveTimerMax = 0.5f; // La serpiente se moverá a cada segundo
 
     private LevelGrid levelGrid;
 
@@ -100,7 +142,13 @@ public class Snake : MonoBehaviour
         {
             gridMoveTimer -= gridMoveTimerMax;
 
-            SnakeMovePosition snakeMovePosition = new SnakeMovePosition(gridPosition, gridMoveDirection);
+            SnakeMovePosition previousSnakeMovePosition = null;
+            if (snakeMovePositionsList.Count > 0)
+            {
+                previousSnakeMovePosition = snakeMovePositionsList[0];
+            }
+
+            SnakeMovePosition snakeMovePosition = new SnakeMovePosition(previousSnakeMovePosition,gridPosition, gridMoveDirection);
             snakeMovePositionsList.Insert(0, snakeMovePosition);
 
             Vector2Int gridMoveDirectionVector;
@@ -223,7 +271,7 @@ public class Snake : MonoBehaviour
     {
         for (int i = 0; i < snakeBodyPartsList.Count; i++)
         {
-            snakeBodyPartsList[i].SetGridPosition(snakeMovePositionsList[i].GetGridPosition());
+            snakeBodyPartsList[i].SetMovePosition(snakeMovePositionsList[i]);
         }
     }
 }
