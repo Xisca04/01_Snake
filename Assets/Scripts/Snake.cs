@@ -213,13 +213,6 @@ public class Snake : MonoBehaviour
             }
             gridPosition += gridMoveDirectionVector; // Mueve la posición 2D de la cabeza de la serpiente
 
-            /*
-            foreach (SnakeMovePosition galleta in snakeMovePositionsList)
-            {
-
-            }
-            */
-
             // ¿He comido comida?
             bool snakeAteFood = levelGrid.TrySnakeEatFood(gridPosition);
             if (snakeAteFood)
@@ -233,6 +226,14 @@ public class Snake : MonoBehaviour
             {
                 snakeMovePositionsList.
                     RemoveAt(snakeMovePositionsList.Count - 1);
+            }
+           
+            foreach (SnakeMovePosition movePosition in snakeMovePositionsList)
+            {
+                if(gridMoveDirectionVector == movePosition.GetGridPosition())
+                {
+                    // GAME OVER
+                }
             }
 
             transform.position = new Vector3(gridPosition.x, gridPosition.y, 0);
