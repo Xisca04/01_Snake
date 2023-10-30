@@ -52,12 +52,52 @@ public class LevelGrid
             foodGridPosition = new Vector2Int(
                 Random.Range(-width / 2, width / 2),
                 Random.Range(-height / 2, height / 2));
-        } while (snake.GetFullSnakeBodyGridPosition().IndexOf(foodGridPosition) != -1);
+        } while (snake.GetFullSnakeBodyGridPosition().IndexOf(foodGridPosition) != -1); 
+
+        // DO: Haz una posición aleatoria
+        // WHILE: La lista de SNAKE de Posiciones NO tiene la posición de la FRUTA -> Devuelve -1 -> Esto indica que no pertenece a la lista y genera la posición
 
         foodGameObject = new GameObject("Food");
         SpriteRenderer foodSpriteRenderer = foodGameObject.AddComponent<SpriteRenderer>();
         foodSpriteRenderer.sprite = GameAssets.Instance.foodSprite;
         foodGameObject.transform.position = new Vector3(foodGridPosition.x, foodGridPosition.y, 0);
+    }
+
+    public Vector2Int ValidateGridPosition(Vector2Int gridPosition)
+    {
+        int w = Half(width);
+        int h = Half(height);
+
+        // Me salgo por la derecha
+        if(gridPosition.x > w)
+        {
+            gridPosition.x = -w; 
+        }
+
+        // Me salgo por la izquierda
+        if(gridPosition.x < w) 
+        {
+            gridPosition.x = w;
+        }
+
+        // Me salgo por arriba
+        if(gridPosition.y > h)
+        {
+            gridPosition.y = -h;
+        }
+
+        // Me salgo por abajo
+        if(gridPosition.y < h)
+        {
+            gridPosition.y = h;
+        }
+
+        return gridPosition;
+    }
+
+    private int Half(int number)
+    {
+        return number / 2;
     }
 }
 

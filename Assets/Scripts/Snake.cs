@@ -12,6 +12,12 @@ public class Snake : MonoBehaviour
         Up
     }
 
+    private enum State
+    {
+        Alive,
+        Dead
+    }
+
     private class SnakeBodyPart
     {
         private SnakeMovePosition snakeMovePosition; // Posición 2D de la SnakeBodyPart
@@ -137,6 +143,7 @@ public class Snake : MonoBehaviour
 
     }
 
+    #region Variables
     private Vector2Int gridPosition; // Posición 2D de la cabeza
     private Vector2Int startGridPosition;
     private Direction gridMoveDirection; // Dirección de la cabeza
@@ -152,6 +159,9 @@ public class Snake : MonoBehaviour
     private List<SnakeMovePosition> snakeMovePositionsList; // Posiciones y direcciones de cada parte (por orden)
     private List<SnakeBodyPart> snakeBodyPartsList;
 
+    private State state;
+    #endregion
+
     private void Awake()
     {
         startGridPosition = new Vector2Int(0, 0);
@@ -163,12 +173,23 @@ public class Snake : MonoBehaviour
         snakeBodySize = 0;
         snakeMovePositionsList = new List<SnakeMovePosition>();
         snakeBodyPartsList = new List<SnakeBodyPart>();
+
+        state = State.Alive;
     }
 
     private void Update()
     {
-        HandleMoveDirection();
-        HandleGridMovement();
+        switch (state)
+        {
+            case State.Alive:
+
+                HandleMoveDirection();
+                HandleGridMovement();
+                break;
+
+            case State.Dead:
+                break;
+        }
     }
 
     public void Setup(LevelGrid levelGrid)
@@ -212,6 +233,7 @@ public class Snake : MonoBehaviour
                     break;
             }
             gridPosition += gridMoveDirectionVector; // Mueve la posición 2D de la cabeza de la serpiente
+            gridPosition = levelGrid.ValidateGridPosition(gridPosition);
 
             // ¿He comido comida?
             bool snakeAteFood = levelGrid.TrySnakeEatFood(gridPosition);
@@ -230,9 +252,10 @@ public class Snake : MonoBehaviour
            
             foreach (SnakeMovePosition movePosition in snakeMovePositionsList)
             {
-                if(gridMoveDirectionVector == movePosition.GetGridPosition())
+                if(gridPosition == movePosition.GetGridPosition()) // Posición coincide con alguna de mis partes -> GAME OVER
                 {
                     // GAME OVER
+                    state = State.Dead;
                 }
             }
 
