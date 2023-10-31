@@ -67,27 +67,27 @@ public class LevelGrid
     {
         int w = Half(width);
         int h = Half(height);
-
-        // Me salgo por la derecha
-        if(gridPosition.x > w)
+        
+        // Right -> Left
+        if (gridPosition.x > w)
         {
-            gridPosition.x = -w; 
+            gridPosition.x = -w;
         }
 
-        // Me salgo por la izquierda
-        if(gridPosition.x < w) 
+        // Left -> Right
+        if (gridPosition.x < -w)
         {
             gridPosition.x = w;
         }
 
-        // Me salgo por arriba
-        if(gridPosition.y > h)
+        // Up -> Down
+        if (gridPosition.y > h)
         {
             gridPosition.y = -h;
         }
 
-        // Me salgo por abajo
-        if(gridPosition.y < h)
+        // Down -> Up
+        if (gridPosition.y < -h)
         {
             gridPosition.y = h;
         }
