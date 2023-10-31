@@ -30,6 +30,7 @@ public class LevelGrid
         {
             Object.Destroy(foodGameObject);
             SpawnFood();
+            GameManager.Instance.AddScore(GameManager.POINTS); // Como es una constante hay que llamar a su script
             return true;
         }
         else

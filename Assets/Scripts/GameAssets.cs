@@ -14,7 +14,7 @@ public class GameAssets : MonoBehaviour
     {
         if (Instance != null)
         {
-            Debug.LogError("There is more than one Instance");
+            Debug.LogError("There is more than one Instance Game Assets");
         }
 
         Instance = this;
