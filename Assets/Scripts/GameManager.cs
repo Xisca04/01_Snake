@@ -43,6 +43,14 @@ public class GameManager : MonoBehaviour
         AddScore(0);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Loader.Load(Loader.Scene.Game);
+        }
+    }
+
     public int GetScore()
     {
         return score;
