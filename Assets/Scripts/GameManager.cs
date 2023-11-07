@@ -42,12 +42,12 @@ public class GameManager : MonoBehaviour
         snake.Setup(levelGrid);
         levelGrid.Setup(snake);
 
-        // Inicialización del Score
+        // Inicializo Score
         scoreUIScript = GetComponentInChildren<ScoreUI>(); // Referencia entre ScoreUI script y GameManager script para poder usar sus variables
         score = 0;
         AddScore(0);
 
-        // Inicialización del PauseMenu
+        // Inicializo PauseMenu
         isPaused = false;
     }
 
