@@ -45,9 +45,16 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.R))
         {
             Loader.Load(Loader.Scene.Game);
+        }
+        */
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseGame();
         }
     }
 
@@ -65,5 +72,17 @@ public class GameManager : MonoBehaviour
     public void SnakeDied()
     {
         GameOverUI.Instance.Show();
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0f;
+        PauseUI.Instance.Show();
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1f;
+        PauseUI.Instance.Hide();
     }
 }
