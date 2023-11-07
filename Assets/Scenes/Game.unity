@@ -1489,6 +1489,22 @@ MonoBehaviour:
   snakeHeadSprite: {fileID: 21300000, guid: 0694544e4af9dc74089d868fa1b3f659, type: 3}
   foodSprite: {fileID: 21300000, guid: cb4bd34af3b42334495daa8897eaf18a, type: 3}
   snakeBodySprite: {fileID: 21300000, guid: 06ade4b3fa9ef3a42a353f61c2f5884e, type: 3}
+  buttonClickClip: {fileID: 8300000, guid: 017dfb81064461147b94f666a68585c6, type: 3}
+  buttonOverClip: {fileID: 8300000, guid: 70748a9a5514bf945a8e9e0ffb51172d, type: 3}
+  snakeDieClip: {fileID: 8300000, guid: d11217810c791464f940f0d0d4572513, type: 3}
+  snakeEatClip: {fileID: 8300000, guid: 41cfd9d5497136546aec1b9eace0231f, type: 3}
+  snakeMoveClip: {fileID: 8300000, guid: 7f9403ad262715f4994f66bc8d445f42, type: 3}
+  soundAudioClipArray:
+  - sound: 0
+    audioClip: {fileID: 8300000, guid: 017dfb81064461147b94f666a68585c6, type: 3}
+  - sound: 1
+    audioClip: {fileID: 8300000, guid: 70748a9a5514bf945a8e9e0ffb51172d, type: 3}
+  - sound: 2
+    audioClip: {fileID: 8300000, guid: d11217810c791464f940f0d0d4572513, type: 3}
+  - sound: 3
+    audioClip: {fileID: 8300000, guid: 41cfd9d5497136546aec1b9eace0231f, type: 3}
+  - sound: 4
+    audioClip: {fileID: 8300000, guid: 7f9403ad262715f4994f66bc8d445f42, type: 3}
 --- !u!1 &947885678
 GameObject:
   m_ObjectHideFlags: 0

@@ -66,11 +66,7 @@ public class GameManager : MonoBehaviour
             {
                 PauseGame();
             }
-
-            isPaused = !isPaused;
-        }
-       
-       
+        } 
     }
 
     public int GetScore()
@@ -93,11 +89,13 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0f;
         PauseUI.Instance.Show();
+        isPaused = true;
     }
 
     public void ResumeGame()
     {
         Time.timeScale = 1f;
         PauseUI.Instance.Hide();
+        isPaused = false;
     }
 }
