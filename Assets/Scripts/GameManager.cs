@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
 
     private ScoreUI scoreUIScript;
 
+    private bool isPaused;
+
     private void Awake() // Singleton
     {
         if (Instance != null)
@@ -41,6 +43,8 @@ public class GameManager : MonoBehaviour
         scoreUIScript = GetComponentInChildren<ScoreUI>(); // Referencia entre ScoreUI script y GameManager script para poder usar sus variables
         score = 0;
         AddScore(0);
+
+        isPaused = false;
     }
 
     private void Update()
@@ -54,8 +58,19 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            PauseGame();
+            if (isPaused)
+            {
+                ResumeGame();
+            }
+            else
+            {
+                PauseGame();
+            }
+
+            isPaused = !isPaused;
         }
+       
+       
     }
 
     public int GetScore()
