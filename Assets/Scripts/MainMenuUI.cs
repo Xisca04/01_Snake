@@ -14,7 +14,7 @@ public class MainMenuUI : MonoBehaviour
 
     private void Awake()
     {
-        playButton.onClick.AddListener(() => { Loader.Load(Loader.Scene.Game); });
+        playButton.onClick.AddListener(() => { Loader.Load(Loader.Scene.Game); SoundManager.PlaySound(SoundManager.Sound.ButtonClick); });
         instructionsButton.onClick.AddListener(ShowInstructionsPanel);
         quitButton.onClick.AddListener(Application.Quit);
 
@@ -28,10 +28,12 @@ public class MainMenuUI : MonoBehaviour
     private void ShowInstructionsPanel()
     {
         instructionsPanel.SetActive(true);
+        SoundManager.PlaySound(SoundManager.Sound.ButtonClick);
     }
 
     private void HideInstructionsPanel()
     {
         instructionsPanel.SetActive(false);
+        SoundManager.PlaySound(SoundManager.Sound.ButtonOver);
     }
 }

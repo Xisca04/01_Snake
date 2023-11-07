@@ -94,6 +94,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         PauseUI.Instance.Show();
         isPaused = true;
+        SoundManager.PlaySound(SoundManager.Sound.ButtonClick);
     }
 
     public void ResumeGame()
@@ -101,5 +102,6 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         PauseUI.Instance.Hide();
         isPaused = false;
+        SoundManager.PlaySound(SoundManager.Sound.ButtonOver);
     }
 }
