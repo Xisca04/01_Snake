@@ -13,10 +13,24 @@ public static class SoundManager
         SnakeMove
     }
 
+    private static GameObject soundManagerGameObject;
+    private static AudioSource audioSource;
+
+    public static void CreateSoundManagerGameObject()
+    {
+        if(soundManagerGameObject == null)
+        {
+            soundManagerGameObject = new GameObject("Sound Manager");
+            audioSource = soundManagerGameObject.AddComponent<AudioSource>();
+        }
+        else
+        {
+            Debug.LogError("Sound Manager already exists");
+        }
+    }
+
     public static void PlaySound(Sound sound)
     {
-        GameObject soundGameObject = new GameObject("Sound" + sound);
-        AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
         audioSource.PlayOneShot(GetAudioClipFromSound(sound));
     }
 

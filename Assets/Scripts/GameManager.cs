@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        SoundManager.CreateSoundManagerGameObject();
+
         // Configuración de la cabeza de serpiente
         GameObject snakeHeadGameObject = new GameObject("Snake Head");
         SpriteRenderer snakeSpriteRenderer = snakeHeadGameObject.AddComponent<SpriteRenderer>();
@@ -40,10 +42,12 @@ public class GameManager : MonoBehaviour
         snake.Setup(levelGrid);
         levelGrid.Setup(snake);
 
+        // Inicialización del Score
         scoreUIScript = GetComponentInChildren<ScoreUI>(); // Referencia entre ScoreUI script y GameManager script para poder usar sus variables
         score = 0;
         AddScore(0);
 
+        // Inicialización del PauseMenu
         isPaused = false;
     }
 
