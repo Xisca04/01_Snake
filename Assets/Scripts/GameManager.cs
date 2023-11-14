@@ -6,14 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }  // Singleton
 
-    // Como es una constante el nombre va así: MAYUS_MAYUS_MAYUS
-    public const int POINTS = 100; // Cantidad de puntos que ganamos al comer la fruta
-    private int score; // Puntuación del jugador
-
     private LevelGrid levelGrid;
     private Snake snake;
-
-    private ScoreUI scoreUIScript;
 
     private bool isPaused;
 
@@ -43,9 +37,7 @@ public class GameManager : MonoBehaviour
         levelGrid.Setup(snake);
 
         // Inicializo Score
-        scoreUIScript = GetComponentInChildren<ScoreUI>(); // Referencia entre ScoreUI script y GameManager script para poder usar sus variables
-        score = 0;
-        AddScore(0);
+        Score.InitializeStaticScore();
 
         // Inicializo PauseMenu
         isPaused = false;
@@ -60,6 +52,7 @@ public class GameManager : MonoBehaviour
         }
         */
 
+        // Lógica pausa con ESCAPE
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPaused)
@@ -71,17 +64,6 @@ public class GameManager : MonoBehaviour
                 PauseGame();
             }
         } 
-    }
-
-    public int GetScore()
-    {
-        return score;
-    }
-
-    public void AddScore(int pointsToAdd)
-    {
-        score += pointsToAdd;
-        scoreUIScript.UpdateScoreText(score);
     }
 
     public void SnakeDied()
