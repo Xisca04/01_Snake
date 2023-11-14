@@ -46,6 +46,7 @@ public static class Score
         OnHighScoreChange = null;
         score = 0;
         AddScore(0);
+        ScoreUI.Instance.UpdateHighScoreText();
     }
 
     public static int GetScore()
