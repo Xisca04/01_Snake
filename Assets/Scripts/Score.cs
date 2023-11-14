@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,11 +6,13 @@ using UnityEngine;
 public static class Score 
 {
     public const string HIGH_SCORE = "highScore"; // Clave en PlayerPrefs
-    
+                                                  // 
     // Como es una constante el nombre va así: MAYUS_MAYUS_MAYUS
     public const int POINTS = 100; // Cantidad de puntos que ganamos al comer la fruta
-    private static int score; // Puntuación del jugador
 
+    public static event EventHandler OnHighScoreChange; // Hemos creado nuestro propio evento
+
+    private static int score; // Puntuación del jugador
     private static ScoreUI scoreUIScript;
 
     public static int GetHighScore()
@@ -17,7 +20,7 @@ public static class Score
         return PlayerPrefs.GetInt(HIGH_SCORE, 0);
     }
 
-    public static bool TrySetNewHighScore(int score) // socore = puntuaion actual
+    public static bool TrySetNewHighScore() // score = puntuaion actual
     {
         int highScore = GetHighScore();
 
@@ -26,6 +29,12 @@ public static class Score
            // Modificamos el High Score
             PlayerPrefs.SetInt(HIGH_SCORE, score);
             PlayerPrefs.Save();
+
+            if(OnHighScoreChange != null)
+            {
+                OnHighScoreChange(null, EventArgs.Empty);
+            }
+            
             return true;
         }
 
@@ -34,6 +43,7 @@ public static class Score
 
     public static void InitializeStaticScore()
     {
+        OnHighScoreChange = null;
         score = 0;
         AddScore(0);
     }
