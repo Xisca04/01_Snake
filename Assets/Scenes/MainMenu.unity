@@ -1713,7 +1713,10 @@ MonoBehaviour:
   instructionsButton: {fileID: 429418370}
   quitButton: {fileID: 1628970909}
   quitInstructionsPanelButton: {fileID: 902228674}
+  originalLevelButton: {fileID: 866666656}
+  timerLevelButton: {fileID: 649313447}
   instructionsPanel: {fileID: 727751908}
+  chooseLevelPanel: {fileID: 1209928661}
 --- !u!1 &866666654
 GameObject:
   m_ObjectHideFlags: 0

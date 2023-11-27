@@ -14,16 +14,22 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private Button timerLevelButton;
 
     [SerializeField] private GameObject instructionsPanel;
+    [SerializeField] private GameObject chooseLevelPanel;
 
     private void Awake()
     {
-        playButton.onClick.AddListener(() => { Loader.Load(Loader.Scene.Game); SoundManager.PlaySound(SoundManager.Sound.ButtonClick); });
+        // playButton.onClick.AddListener(ShowChooseLevelPanel);
+
+        // originalLevelButton.onClick.AddListener(() => { Loader.Load(Loader.Scene.Game); SoundManager.PlaySound(SoundManager.Sound.ButtonClick); });
+        // timerLevelButton.onClick.AddListener(() => {Loader.Load(Loader.Scene.Game); SoundManager.PlaySound(SoundManager.Sound.ButtonClick); });
+
         instructionsButton.onClick.AddListener(ShowInstructionsPanel);
         quitButton.onClick.AddListener(Application.Quit);
 
         quitInstructionsPanelButton.onClick.AddListener(HideInstructionsPanel);
 
         HideInstructionsPanel();
+        HideChooseLevelPanel();
 
         SoundManager.CreateSoundManagerGameObject();
     }
@@ -38,5 +44,15 @@ public class MainMenuUI : MonoBehaviour
     {
         instructionsPanel.SetActive(false);
         SoundManager.PlaySound(SoundManager.Sound.ButtonOver);
+    }
+
+    private void ShowChooseLevelPanel()
+    {
+        chooseLevelPanel.SetActive(true);
+    }
+
+    private void HideChooseLevelPanel()
+    {
+        chooseLevelPanel.SetActive(false);
     }
 }
