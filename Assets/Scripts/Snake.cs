@@ -264,9 +264,12 @@ public class Snake : MonoBehaviour
 
             transform.position = new Vector3(gridPosition.x, gridPosition.y, 0);
             transform.eulerAngles = new Vector3(0, 0, GetAngleFromVector(gridMoveDirectionVector));
+            // canMove = true
             UpdateBodyParts();
         }
     }
+
+    // bool canMove para quitar el bug
 
     private void HandleMoveDirection()
     {

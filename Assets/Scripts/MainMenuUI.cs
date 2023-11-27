@@ -10,6 +10,9 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private Button quitButton;
     [SerializeField] private Button quitInstructionsPanelButton;
 
+    [SerializeField] private Button originalLevelButton;
+    [SerializeField] private Button timerLevelButton;
+
     [SerializeField] private GameObject instructionsPanel;
 
     private void Awake()
