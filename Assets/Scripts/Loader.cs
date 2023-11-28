@@ -16,7 +16,8 @@ public static class Loader
     {
         Game,
         LoadingScene,
-        MainMenu
+        MainMenu,
+        TimerLevel
     }
 
     public static void Load(Scene scene)

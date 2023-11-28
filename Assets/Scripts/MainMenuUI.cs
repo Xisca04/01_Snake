@@ -21,7 +21,7 @@ public class MainMenuUI : MonoBehaviour
         playButton.onClick.AddListener(ShowChooseLevelPanel);
 
         originalLevelButton.onClick.AddListener(() => { Loader.Load(Loader.Scene.Game); SoundManager.PlaySound(SoundManager.Sound.ButtonClick); });
-        // timerLevelButton.onClick.AddListener(() => {Loader.Load(Loader.Scene.Game); SoundManager.PlaySound(SoundManager.Sound.ButtonClick); });
+        timerLevelButton.onClick.AddListener(() => { Loader.Load(Loader.Scene.TimerLevel); SoundManager.PlaySound(SoundManager.Sound.ButtonClick); });
 
         instructionsButton.onClick.AddListener(ShowInstructionsPanel);
         quitButton.onClick.AddListener(Application.Quit);
