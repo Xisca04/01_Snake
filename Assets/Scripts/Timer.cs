@@ -14,6 +14,8 @@ public class Timer: MonoBehaviour
     public float timerFood = 5;
     public TextMeshProUGUI timerText;
 
+    [SerializeField] private GameObject timerFoodPanel;
+
     private void Awake() // Singleton
     {
         if (Instance != null)
@@ -49,4 +51,14 @@ public class Timer: MonoBehaviour
             timerText.color = Color.red;
         }
     }
+
+    /*
+    private IEnumerator AddedTimeFood()
+    {
+       // yield return new WaitForSeconds(timerFood);
+       // timerFoodPanel.SetActive(true);
+        //yield return new WaitForSeconds(timerFood);
+       // timerFoodPanel.SetActive(false);
+    }
+    */
 }
