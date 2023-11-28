@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using TMPro;
+using UnityEditor.ShaderGraph;
 
 public class Timer: MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class Timer: MonoBehaviour
 
     private void Start()
     {
-        _timer = 60;
+        _timer = 10;
     }
 
     private void Update()
@@ -41,6 +42,11 @@ public class Timer: MonoBehaviour
         if (_timer <= 0)
         {
             _timer = 0;
+        }
+
+        if(_timer < 5)
+        {
+            timerText.color = Color.red;
         }
     }
 }
