@@ -18,9 +18,9 @@ public class MainMenuUI : MonoBehaviour
 
     private void Awake()
     {
-        // playButton.onClick.AddListener(ShowChooseLevelPanel);
+        playButton.onClick.AddListener(ShowChooseLevelPanel);
 
-        // originalLevelButton.onClick.AddListener(() => { Loader.Load(Loader.Scene.Game); SoundManager.PlaySound(SoundManager.Sound.ButtonClick); });
+        originalLevelButton.onClick.AddListener(() => { Loader.Load(Loader.Scene.Game); SoundManager.PlaySound(SoundManager.Sound.ButtonClick); });
         // timerLevelButton.onClick.AddListener(() => {Loader.Load(Loader.Scene.Game); SoundManager.PlaySound(SoundManager.Sound.ButtonClick); });
 
         instructionsButton.onClick.AddListener(ShowInstructionsPanel);
