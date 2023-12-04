@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEditor.SearchService;
+using UnityEngine.SceneManagement;
 
 public class GameOverUI : MonoBehaviour
 {
@@ -14,6 +16,8 @@ public class GameOverUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI highScoreText;
 
+    private UnityEngine.SceneManagement.Scene actualScene;
+
     private void Awake()
     {
         if (Instance != null)
@@ -23,10 +27,17 @@ public class GameOverUI : MonoBehaviour
 
         Instance = this;
 
-        restartButton.onClick.AddListener(() => { Loader.Load(Loader.Scene.Game);});
-        timerLevelRestartButton.onClick.AddListener(() => Loader.Load(Loader.Scene.TimerLevel));
-
         Hide();
+        actualScene = SceneManager.GetActiveScene();
+
+        if(actualScene.name == "Game")
+        {
+            restartButton.onClick.AddListener(() => { Loader.Load(Loader.Scene.Game); });
+        }
+        else if(actualScene.name == "TimerLevel")
+        {
+            timerLevelRestartButton.onClick.AddListener(() => Loader.Load(Loader.Scene.TimerLevel));
+        }
     }
 
     public void Show(bool hasNewHighScore)

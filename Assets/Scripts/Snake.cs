@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Snake : MonoBehaviour
 {
@@ -160,6 +161,8 @@ public class Snake : MonoBehaviour
     private List<SnakeBodyPart> snakeBodyPartsList;
 
     private State state;
+
+    private Scene actualScene;
     #endregion
 
     private void Awake()
@@ -175,6 +178,8 @@ public class Snake : MonoBehaviour
         snakeBodyPartsList = new List<SnakeBodyPart>();
 
         state = State.Alive;
+
+        actualScene = SceneManager.GetActiveScene();
     }
 
     private void Update()
@@ -244,8 +249,13 @@ public class Snake : MonoBehaviour
                 snakeBodySize++;
                 CreateBodyPart();
                 SoundManager.PlaySound(SoundManager.Sound.SnakeEat);
-                Timer.Instance._timer += Timer.Instance.timerFood; // When snake eats +5 seconds to the timer
-                StartCoroutine(Timer.Instance.AddedTimeFood());
+                
+                // Scene actualScene = SceneManager.GetActiveScene();
+                if (actualScene.name == "TimerLevel")
+                {
+                    Timer.Instance.timeLeft += Timer.Instance.timerFood; // When snake eats +5 seconds to the timer
+                    StartCoroutine(Timer.Instance.AddedTimeFood());
+                }
             }
 
             if (snakeMovePositionsList.Count > snakeBodySize)
@@ -263,11 +273,14 @@ public class Snake : MonoBehaviour
                     GameManager.Instance.SnakeDied();
                 }
             }
-
-            if(Timer.Instance._timer == 0.0f) // GAME OVER if timer = 0
+           
+            if (actualScene.name == "TimerLevel")
             {
-                state = State.Dead;
-                GameManager.Instance.SnakeDied();
+                if (Timer.Instance.timeLeft == 0.0f) // GAME OVER if timer = 0
+                {
+                    state = State.Dead;
+                    GameManager.Instance.SnakeDied();
+                }
             }
 
             transform.position = new Vector3(gridPosition.x, gridPosition.y, 0);

@@ -49,6 +49,7 @@ public class MainMenuUI : MonoBehaviour
     private void ShowChooseLevelPanel()
     {
         chooseLevelPanel.SetActive(true);
+        SoundManager.PlaySound(SoundManager.Sound.ButtonClick);
     }
 
     private void HideChooseLevelPanel()

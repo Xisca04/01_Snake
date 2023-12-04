@@ -348,7 +348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 0.9019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -464,7 +464,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &328215092
 RectTransform:
   m_ObjectHideFlags: 0
@@ -501,7 +501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99956619883b8754aa125ffb800bc87b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  restartButton: {fileID: 1713521482}
+  restartButton: {fileID: 0}
   timerLevelRestartButton: {fileID: 1713521482}
   messageText: {fileID: 1019072817}
   scoreText: {fileID: 1777507506}
@@ -1206,7 +1206,7 @@ RectTransform:
   m_GameObject: {fileID: 616245207}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 8.831087, y: 8.831087, z: 8.831087}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 945945997}
@@ -1214,7 +1214,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -4.899994, y: -117.5}
+  m_AnchoredPosition: {x: -696, y: -396}
   m_SizeDelta: {x: -306.783, y: 58.249}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &616245209
@@ -1230,7 +1230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.16862746}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1956,8 +1956,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 3097139252
+  m_fontColor: {r: 0.20220721, g: 0.59539247, b: 0.6037736, a: 0.72156864}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2843,7 +2843,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66b62680eccc33846b75a6880e91c6a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timer: 10
+  timeLeft: 60
   timerFood: 5
   timerText: {fileID: 1783629485}
   timerFoodPanel: {fileID: 616245207}
@@ -3637,7 +3637,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 00,0
+  m_text: 0:00
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 07e2dbe45ecf15945a85f777a7999bb6, type: 2}
   m_sharedMaterial: {fileID: 5827565137667279768, guid: 07e2dbe45ecf15945a85f777a7999bb6, type: 2}
