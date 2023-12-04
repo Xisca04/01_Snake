@@ -464,7 +464,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &328215092
 RectTransform:
   m_ObjectHideFlags: 0
@@ -502,6 +502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   restartButton: {fileID: 1713521482}
+  timerLevelRestartButton: {fileID: 1713521482}
   messageText: {fileID: 1019072817}
   scoreText: {fileID: 1777507506}
   highScoreText: {fileID: 1946287502}
@@ -1229,7 +1230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.16862746}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2845,6 +2846,7 @@ MonoBehaviour:
   _timer: 10
   timerFood: 5
   timerText: {fileID: 1783629485}
+  timerFoodPanel: {fileID: 616245207}
 --- !u!1 &1472525939
 GameObject:
   m_ObjectHideFlags: 0
@@ -3201,7 +3203,7 @@ GameObject:
   - component: {fileID: 1713521483}
   - component: {fileID: 1713521482}
   m_Layer: 0
-  m_Name: Restart Button
+  m_Name: 'TimerLevel Restart Button '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

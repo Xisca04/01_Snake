@@ -9,6 +9,7 @@ public class GameOverUI : MonoBehaviour
     public static GameOverUI Instance { get; private set; }  // Singleton
 
     [SerializeField] private Button restartButton;
+    [SerializeField] private Button timerLevelRestartButton;
     [SerializeField] private TextMeshProUGUI messageText;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI highScoreText;
@@ -23,6 +24,7 @@ public class GameOverUI : MonoBehaviour
         Instance = this;
 
         restartButton.onClick.AddListener(() => { Loader.Load(Loader.Scene.Game);});
+        timerLevelRestartButton.onClick.AddListener(() => Loader.Load(Loader.Scene.TimerLevel));
 
         Hide();
     }

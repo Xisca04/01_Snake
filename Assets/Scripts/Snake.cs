@@ -245,6 +245,7 @@ public class Snake : MonoBehaviour
                 CreateBodyPart();
                 SoundManager.PlaySound(SoundManager.Sound.SnakeEat);
                 Timer.Instance._timer += Timer.Instance.timerFood; // When snake eats +5 seconds to the timer
+                StartCoroutine(Timer.Instance.AddedTimeFood());
             }
 
             if (snakeMovePositionsList.Count > snakeBodySize)
