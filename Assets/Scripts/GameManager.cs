@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
     {
         SoundManager.PlaySound(SoundManager.Sound.SnakeDie);
         GameOverUI.Instance.Show(Score.TrySetNewHighScore());
-        Timer.Instance.timeLeft = 0; // If we died before the time is up --> se reinicia
+        Timer.Instance.timeLeft = 0; // If we died before the time is up --> se queda en ese punto - se para
     }
 
     public void PauseGame()
