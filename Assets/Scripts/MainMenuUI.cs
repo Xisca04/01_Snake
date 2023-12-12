@@ -13,19 +13,12 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private Button originalLevelButton;
     [SerializeField] private Button timerLevelButton;
 
-    [SerializeField] private Button resetHighScoreButton;
-    [SerializeField] private Button noResetHighScoreButton;
-
     [SerializeField] private GameObject instructionsPanel;
     [SerializeField] private GameObject chooseLevelPanel;
-    [SerializeField] private GameObject resetHighScorePanel;
 
     private void Awake()
     {
-        playButton.onClick.AddListener(ShowResetHighScorePanel);
-
-        resetHighScoreButton.onClick.AddListener(ButtonResetHighScore);
-        noResetHighScoreButton.onClick.AddListener(ButtonNoResetHighScore);
+        playButton.onClick.AddListener(ShowChooseLevelPanel);
 
         originalLevelButton.onClick.AddListener(() => { Loader.Load(Loader.Scene.Game); SoundManager.PlaySound(SoundManager.Sound.ButtonClick); });
         timerLevelButton.onClick.AddListener(() => { Loader.Load(Loader.Scene.TimerLevel); SoundManager.PlaySound(SoundManager.Sound.ButtonClick); });
@@ -37,7 +30,6 @@ public class MainMenuUI : MonoBehaviour
 
         HideInstructionsPanel();
         HideChooseLevelPanel();
-        HideResetHighScorePanel();
 
         SoundManager.CreateSoundManagerGameObject();
     }
@@ -63,34 +55,5 @@ public class MainMenuUI : MonoBehaviour
     private void HideChooseLevelPanel()
     {
         chooseLevelPanel.SetActive(false);
-    }
-
-    private void HideResetHighScorePanel()
-    {
-        resetHighScorePanel.SetActive(false);
-    }
-
-    private void ShowResetHighScorePanel()
-    {
-        resetHighScorePanel.SetActive(true);
-    }
-
-    private void ResetHighScore()
-    {
-        PlayerPrefs.DeleteAll();
-        ScoreUI.Instance.UpdateHighScoreText();
-    }
-
-    private void ButtonResetHighScore()
-    {
-        HideResetHighScorePanel();
-        ShowChooseLevelPanel();
-        ResetHighScore();
-    }
-
-    private void ButtonNoResetHighScore()
-    {
-        HideResetHighScorePanel();
-        ShowChooseLevelPanel();
     }
 }
