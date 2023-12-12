@@ -18,6 +18,7 @@ public class MainMenuUI : MonoBehaviour
 
     private void Awake()
     {
+        SoundManager.CreateSoundManagerGameObject();
         playButton.onClick.AddListener(ShowChooseLevelPanel);
 
         originalLevelButton.onClick.AddListener(() => { Loader.Load(Loader.Scene.Game); SoundManager.PlaySound(SoundManager.Sound.ButtonClick); });
@@ -31,7 +32,7 @@ public class MainMenuUI : MonoBehaviour
         HideInstructionsPanel();
         HideChooseLevelPanel();
 
-        SoundManager.CreateSoundManagerGameObject();
+        
     }
 
     private void ShowInstructionsPanel()
