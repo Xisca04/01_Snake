@@ -5,9 +5,9 @@ using UnityEngine;
 public class LoaderCallback : MonoBehaviour
 {
     private bool firstUpdate = true;
-    private float sliderTimeLeft = 1.85f;
+    private float sliderTimeLeft = 1.85f; // Time it takes for the slider to complete
 
-    private void Update()  // Poner contador o corrutina si queremos que dure más la escena de carga
+    private void Update()
     {
         if (firstUpdate)
         {
@@ -16,7 +16,7 @@ public class LoaderCallback : MonoBehaviour
         }
     }
 
-    // corruitina más tiempo visual escena de carga
+    // Couroutine that visually lengthens the loading scene 
 
     private IEnumerator LoadChargerSlider()
     {

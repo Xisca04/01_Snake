@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PauseUI : MonoBehaviour
 {
+    // Code of the Pause Menu UI
     public static PauseUI Instance { get; private set; }  // Singleton
 
     [SerializeField] private Button resumeButton;

@@ -20,9 +20,12 @@ public class MainMenuUI : MonoBehaviour
     {
         SoundManager.CreateSoundManagerGameObject();
 
+        // Programming the main menu buttons by code
         playButton.onClick.AddListener(ShowChooseLevelPanel);
 
+        // Load the scene Game (original level) and play a sound
         originalLevelButton.onClick.AddListener(() => { Loader.Load(Loader.Scene.Game); SoundManager.PlaySound(SoundManager.Sound.ButtonClick); });
+        // Load the scene TimerLevel and play a sound
         timerLevelButton.onClick.AddListener(() => { Loader.Load(Loader.Scene.TimerLevel); SoundManager.PlaySound(SoundManager.Sound.ButtonClick); });
 
         instructionsButton.onClick.AddListener(ShowInstructionsPanel);
