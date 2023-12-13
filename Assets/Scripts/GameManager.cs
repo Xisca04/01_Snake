@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class GameManager : MonoBehaviour
 
     private bool isPaused;
 
+    [SerializeField] private Button pauseButton;
+
     private void Awake() // Singleton
     {
         if (Instance != null)
@@ -19,6 +22,8 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
+
+        pauseButton.onClick.AddListener(PauseGame);
     }
 
     private void Start()
