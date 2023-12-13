@@ -31,7 +31,7 @@ public class LevelGrid
         {
             Object.Destroy(foodGameObject);
             SpawnFood();
-            Score.AddScore(Score.POINTS); // Como es una constante hay que llamar a su script
+            Score.AddScore(Score.POINTS); // Because is a constant we have to call its script
             return true;
         }
         else
@@ -42,12 +42,12 @@ public class LevelGrid
 
     private void SpawnFood()
     {
-        // while (condicion){
-        // cosas
+        // while (condition){
+        // things
         // }
 
-        // { cosas }
-        // while (condicion)
+        // { things }
+        // while (condition)
 
         do
         {
@@ -56,8 +56,8 @@ public class LevelGrid
                 Random.Range(-height / 2, height / 2));
         } while (snake.GetFullSnakeBodyGridPosition().IndexOf(foodGridPosition) != -1); 
 
-        // DO: Haz una posición aleatoria
-        // WHILE: La lista de SNAKE de Posiciones NO tiene la posición de la FRUTA -> Devuelve -1 -> Esto indica que no pertenece a la lista y genera la posición
+        // DO: create a random position
+        // WHILE: Snake's list of positions don't have the FRUIT'S position -> Return -1 -> Doesn't belong to the list -> Generate a new position
 
         foodGameObject = new GameObject("Food");
         SpriteRenderer foodSpriteRenderer = foodGameObject.AddComponent<SpriteRenderer>();

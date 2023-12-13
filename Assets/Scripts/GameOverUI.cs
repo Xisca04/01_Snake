@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEditor.SearchService;
+using UnityEditor;
 using UnityEngine.SceneManagement;
 
 public class GameOverUI : MonoBehaviour
@@ -28,13 +28,16 @@ public class GameOverUI : MonoBehaviour
         Instance = this;
 
         Hide();
+
+        // Get the current scene
         actualScene = SceneManager.GetActiveScene();
 
+        // If the player is in Game Scene the restart button will load the game scene (original level)
         if(actualScene.name == "Game")
         {
             restartButton.onClick.AddListener(() => { Loader.Load(Loader.Scene.Game); });
         }
-        else if(actualScene.name == "TimerLevel")
+        else if(actualScene.name == "TimerLevel") // If the player is in the Timer level the restart button will load the timer level
         {
             timerLevelRestartButton.onClick.AddListener(() => Loader.Load(Loader.Scene.TimerLevel));
         }
@@ -57,7 +60,7 @@ public class GameOverUI : MonoBehaviour
         highScoreText.text = Score.GetHighScore().ToString();
         messageText.text = hasNewHighScore ? "CONGRATULATIONS" : "DON'T WORRY, NEXT TIME";
 
-
+        // Other way to code the previous line(61)
         // if (hasNewHighScore)
         // {
         //     messsageText.text = "CONGRATULATIONS";

@@ -25,34 +25,27 @@ public class GameManager : MonoBehaviour
     {
         SoundManager.CreateSoundManagerGameObject();
 
-        // Configuración de la cabeza de serpiente
+        // Configuration of the snake's head
         GameObject snakeHeadGameObject = new GameObject("Snake Head");
         SpriteRenderer snakeSpriteRenderer = snakeHeadGameObject.AddComponent<SpriteRenderer>();
         snakeSpriteRenderer.sprite = GameAssets.Instance.snakeHeadSprite;
         snake = snakeHeadGameObject.AddComponent<Snake>();
 
-        // Configurar el LevelGrid
+        // Configuratioin of the LevelGrid
         levelGrid = new LevelGrid(20, 20);
         snake.Setup(levelGrid);
         levelGrid.Setup(snake);
 
-        // Inicializo Score
+        // Initialize of the score
         Score.InitializeStaticScore();
 
-        // Inicializo PauseMenu
+        // Initialize of the Pause Menu
         isPaused = false;
     }
 
     private void Update()
     {
-        /*
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Loader.Load(Loader.Scene.Game);
-        }
-        */
-
-        // Lógica pausa con ESCAPE
+        // Activate the Pause Menu iwith Escape Key
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPaused)
@@ -70,9 +63,10 @@ public class GameManager : MonoBehaviour
     {
         SoundManager.PlaySound(SoundManager.Sound.SnakeDie);
         GameOverUI.Instance.Show(Score.TrySetNewHighScore());
-        Timer.Instance.timeLeft = 0; // If we died before the time is up --> se queda en ese punto - se para
+        Timer.Instance.timeLeft = 0; // If we died before the time is up --> timer turn to zero
     }
 
+    // Game's configuration if the Pause Menu is On
     public void PauseGame()
     {
         Time.timeScale = 0f;
@@ -81,6 +75,7 @@ public class GameManager : MonoBehaviour
         SoundManager.PlaySound(SoundManager.Sound.ButtonClick);
     }
 
+    // Game's configuration if the Pause Menu is Off
     public void ResumeGame()
     {
         Time.timeScale = 1f;

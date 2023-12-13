@@ -17,9 +17,8 @@ public class GameAssets : MonoBehaviour
     public Sprite snakeHeadSprite;
     public Sprite foodSprite;
     public Sprite snakeBodySprite;
-
    
-
+    // Array of the game's sounds
     public SoundAudioClip[] soundAudioClipArray;
 
     private void Awake() // Singleton

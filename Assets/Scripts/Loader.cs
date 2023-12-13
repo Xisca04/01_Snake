@@ -6,12 +6,12 @@ using UnityEngine.SceneManagement;
 
 public static class Loader 
 {
-    // Una clase STATIC tiene todas sus variables y funciones también STATIC
+    // STATIC Class has its functions and variables STATICS
 
-    // Variable que guarda una función sin INPUTS ni OUTPUTS
-    private static Action loaderCallbackAction; // Es un DELEGADO
+    // Variable which saves a function with no outputs or inputs
+    private static Action loaderCallbackAction; // DELEGATE
 
-    // Lista de nuestras escenas
+    // Lists of game's scenes
     public enum Scene
     {
         Game,
@@ -22,13 +22,13 @@ public static class Loader
 
     public static void Load(Scene scene)
     {
-        // Asignas el loaderCallbackAction una función que no recibe parámetros y ejecuta la linea 26 (LoadScene)
+        // Assign the loaderCallbackAction to a function that takes no parameters and execute line 26 (LoadScene)
         loaderCallbackAction = () =>
         {
             SceneManager.LoadScene(scene.ToString());
         };
 
-        // Llamamos a la escena de carga
+        // Call of the load scene
         SceneManager.LoadScene(Scene.LoadingScene.ToString());
     }
 
