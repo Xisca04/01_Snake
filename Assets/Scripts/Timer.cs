@@ -63,7 +63,7 @@ public class Timer: MonoBehaviour
         }
     }
 
-    private void UpdateTimer (float currentTime) // Convertir los 60 segundos en 1 min
+    private void UpdateTimer (float currentTime) // Convert the 60 seconds to 1 min
     {
         currentTime += 1;
 
@@ -73,7 +73,7 @@ public class Timer: MonoBehaviour
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
     
-    public IEnumerator AddedTimeFood() // Aparece y desaparece el panel de los 5 segundos conseguidoss
+    public IEnumerator AddedTimeFood() // The panel of the 5 seconds achieved appears and disappears
     {
         timerFoodPanel.SetActive(true);
         yield return new WaitForSeconds(timerPanel);

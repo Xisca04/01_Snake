@@ -6,13 +6,13 @@ using UnityEngine;
 public static class Score 
 {
     public const string HIGH_SCORE = "highScore"; // Clave en PlayerPrefs
-                                                  // 
-    // Como es una constante el nombre va así: MAYUS_MAYUS_MAYUS
-    public const int POINTS = 100; // Cantidad de puntos que ganamos al comer la fruta
+                                                  
+    // The constants' name are like this: MAYUS_MAYUS_MAYUS
+    public const int POINTS = 100; // Points that we will win if the snake eats the fruit
 
-    public static event EventHandler OnHighScoreChange; // Hemos creado nuestro propio evento
+    public static event EventHandler OnHighScoreChange; // Event
 
-    private static int score; // Puntuación del jugador
+    private static int score; // Player' score
     private static ScoreUI scoreUIScript;
 
     public static int GetHighScore()
@@ -20,7 +20,7 @@ public static class Score
         return PlayerPrefs.GetInt(HIGH_SCORE, 0);
     }
 
-    public static bool TrySetNewHighScore() // score = puntuaion actual
+    public static bool TrySetNewHighScore() // score = current puntuation
     {
         int highScore = GetHighScore();
 

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public static class SoundManager
 {
+    // Sound's list of the game
     public enum Sound
     {
         ButtonClick,

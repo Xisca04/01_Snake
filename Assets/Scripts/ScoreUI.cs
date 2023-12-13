@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ScoreUI : MonoBehaviour
 {
-    // Parte visual de la puntuación
+    // Visual part of the score
     public static ScoreUI Instance { get; private set; }  // Singleton
 
     [SerializeField] private TextMeshProUGUI scoreText;
@@ -21,19 +21,19 @@ public class ScoreUI : MonoBehaviour
 
         Instance = this;
 
-        // Suscribir un método al evento OnHighScoreChange
+        // We subscribe a method to the event that we've created
 
         Score.OnHighScoreChange += Score_OnHighScoreChange;
     }
 
-    private void OnDisable()  // Desuscribir evento
+    private void OnDisable()  // Unsuscribe a method to the event
     {
         Score.OnHighScoreChange += Score_OnHighScoreChange;
     }
 
     private void Score_OnHighScoreChange(object sender, EventArgs e)
     {
-        // Lo que tiene que ocurrir al llamarse el evento
+        // When we call the event the high score will be updated
         UpdateHighScoreText();
     }
 

@@ -21,7 +21,7 @@ public class Snake : MonoBehaviour
 
     private class SnakeBodyPart
     {
-        private SnakeMovePosition snakeMovePosition; // Posición 2D de la SnakeBodyPart
+        private SnakeMovePosition snakeMovePosition; // SnakeBodyPart's 2D position
         private Transform transform;
 
         public SnakeBodyPart(int bodyIndex)
@@ -37,13 +37,13 @@ public class Snake : MonoBehaviour
 
         public void SetMovePosition(SnakeMovePosition snakeMovePosition)
         {
-            // Posición (gridPosition)
-            this.snakeMovePosition = snakeMovePosition; // Posición 2D y la dirección de la SnakeBodyPart
+            // Position (gridPosition)
+            this.snakeMovePosition = snakeMovePosition; // 2D position + SnakeBodyPart's direction
             Vector2Int gridPosition = snakeMovePosition.GetGridPosition();
             transform.position = new Vector3(gridPosition.x,
-                gridPosition.y, 0); // Posición 3D del G.O.
+                gridPosition.y, 0); // 3D POSITION OF THE G.O
 
-            // Dirección (direction)
+            // Direction
             float angle;
             switch (snakeMovePosition.GetDirection())
             {
@@ -170,8 +170,8 @@ public class Snake : MonoBehaviour
         startGridPosition = new Vector2Int(0, 0);
         gridPosition = startGridPosition;
 
-        gridMoveDirection = Direction.Up; // Dirección arriba por defecto
-        transform.eulerAngles = Vector3.zero; // Rotación arriba por defecto
+        gridMoveDirection = Direction.Up; // Default direction: up
+        transform.eulerAngles = Vector3.zero; // Default rotation: up
 
         snakeBodySize = 0;
         snakeMovePositionsList = new List<SnakeMovePosition>();
@@ -179,6 +179,7 @@ public class Snake : MonoBehaviour
 
         state = State.Alive;
 
+        // Get the actual scene
         actualScene = SceneManager.GetActiveScene();
     }
 
@@ -199,16 +200,16 @@ public class Snake : MonoBehaviour
 
     public void Setup(LevelGrid levelGrid)
     {
-        // levelGrid de snake = levelGrid que viene por parámetro
+        // Snake's levelGrid = levelGrid that cames by parameter
         this.levelGrid = levelGrid;
     }
 
-    private void HandleGridMovement() // Relativo al movimiento en 2D
+    private void HandleGridMovement() // Relative to the 2D movement
     {
         gridMoveTimer += Time.deltaTime;
         if (gridMoveTimer >= gridMoveTimerMax)
         {
-            gridMoveTimer -= gridMoveTimerMax; // Se reinicia el temporizador
+            gridMoveTimer -= gridMoveTimerMax; // Timer reset
             SoundManager.PlaySound(SoundManager.Sound.SnakeMove);
 
             SnakeMovePosition previousSnakeMovePosition = null;
@@ -220,7 +221,7 @@ public class Snake : MonoBehaviour
             SnakeMovePosition snakeMovePosition = new SnakeMovePosition(previousSnakeMovePosition, gridPosition, gridMoveDirection);
             snakeMovePositionsList.Insert(0, snakeMovePosition);
            
-            //Relación entre enum Direction y vectores: left, right, up y down.
+            //Relation between enum Direction and vectores: left, right, up and down.
             Vector2Int gridMoveDirectionVector;
             switch (gridMoveDirection)
             {
@@ -238,22 +239,21 @@ public class Snake : MonoBehaviour
                     gridMoveDirectionVector = new Vector2Int(0, 1);
                     break;
             }
-            gridPosition += gridMoveDirectionVector; // Mueve la posición 2D de la cabeza de la serpiente
+            gridPosition += gridMoveDirectionVector; // Moves the position of the snake's head
             gridPosition = levelGrid.ValidateGridPosition(gridPosition);
 
-            // ¿He comido comida?
+            // ¿Have I eaten food?
             bool snakeAteFood = levelGrid.TrySnakeEatFood(gridPosition);
             if (snakeAteFood)
             {
-                // El cuerpo crece
+                // The body grows
                 snakeBodySize++;
                 CreateBodyPart();
                 SoundManager.PlaySound(SoundManager.Sound.SnakeEat);
                 
-                // Scene actualScene = SceneManager.GetActiveScene();
                 if (actualScene.name == "TimerLevel")
                 {
-                    Timer.Instance.timeLeft += Timer.Instance.timerFood; // When snake eats +5 seconds to the timer
+                    Timer.Instance.timeLeft += Timer.Instance.timerFood; // When snake eats: +5 seconds to the timer
                     StartCoroutine(Timer.Instance.AddedTimeFood());
                 }
             }
@@ -266,7 +266,7 @@ public class Snake : MonoBehaviour
            
             foreach (SnakeMovePosition movePosition in snakeMovePositionsList)
             {
-                if(gridPosition == movePosition.GetGridPosition()) // Posición coincide con alguna de mis partes -> GAME OVER
+                if(gridPosition == movePosition.GetGridPosition()) // If position coincides with a body part -> GAME OVER
                 {
                     // GAME OVER
                     state = State.Dead;
@@ -274,7 +274,7 @@ public class Snake : MonoBehaviour
                 }
             }
            
-            if (actualScene.name == "TimerLevel")
+            if (actualScene.name == "TimerLevel") // Check if the player is in the TIMER LEVEL
             {
                 if (Timer.Instance.timeLeft == 0.0f) // GAME OVER if timer = 0
                 {
@@ -285,40 +285,35 @@ public class Snake : MonoBehaviour
 
             transform.position = new Vector3(gridPosition.x, gridPosition.y, 0);
             transform.eulerAngles = new Vector3(0, 0, GetAngleFromVector(gridMoveDirectionVector));
-            // canMove = true
             UpdateBodyParts();
         }
     }
-
-    // bool canMove para quitar el bug
 
     private void HandleMoveDirection()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        // Cambio dirección hacia arriba
-        if (verticalInput > 0) // Si he pulsado hacia arriba (W o Flecha Arriba)
+        // Change direction to UP
+        if (verticalInput > 0) // If I've pressed W or Up arrow
         {
-            if (gridMoveDirection != Direction.Down) // Si iba en horizontal
+            if (gridMoveDirection != Direction.Down) // If I'm going horizontal
             {
-                // Cambio la dirección hacia arriba (0,1)
+                // Change direction to up (0,1)
                 gridMoveDirection = Direction.Up;
             }
         }
 
-        // Cambio dirección hacia abajo
-        // Input es abajo?
-        if (verticalInput < 0)
+        // Change direction to DOWN
+        if (verticalInput < 0) // If I've pressed S or Down arrow
         {
-            // Mi dirección hasta ahora era horizontal
             if (gridMoveDirection != Direction.Up)
             {
                 gridMoveDirection = Direction.Down;
             }
         }
 
-        // Cambio dirección hacia derecha
+        // Change direction to RIGHT
         if (horizontalInput > 0)
         {
             if (gridMoveDirection != Direction.Left)
@@ -327,7 +322,7 @@ public class Snake : MonoBehaviour
             }
         }
 
-        // Cambio dirección hacia izquierda
+        // Change direction to LEFT
         if (horizontalInput < 0)
         {
             if (gridMoveDirection != Direction.Right)
